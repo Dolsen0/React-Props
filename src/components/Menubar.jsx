@@ -1,9 +1,13 @@
 import React from "react";
 
-function Menubar(){
+function Menubar({name, setName}){
     return (
-    <nav>
-        menubar
+    <nav style={{display: 'flex', justifyContent: 'space-between'}}>
+       <span>Menubar</span>
+       {name
+         ? <button onClick={() => setName(null)}>Logout</button>
+         : <button onClick={() => setName("Derek")} >Login</button>
+       }
     </nav>
 )
 
