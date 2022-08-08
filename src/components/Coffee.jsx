@@ -2,19 +2,34 @@ import React, { useState } from "react";
 
 function Coffee() {
   const [coffeeList, setCoffeeList] = useState();
-  const getCoffee = (temperature) => {
+  
+    //.then .catch  handling
+    // const getCoffee = (temperature) => {
     //fetch coffee api
-    fetch(`https://api.sampleapis.com/coffee/${temperature}`)
-        .then(results => results.json())
-        .then(data => setCoffeeList(data))
-        .catch(err => alert(err))
+    // fetch(`https://api.sampleapis.com/coffee/${temperature}`)
+    //     .then(results => results.json())
+    //     .then(data => setCoffeeList(data))
+    //     .catch(err => alert(err))
     //results => setCoffeeList
 
-  }
+    //async await handling
+    const getCoffeeSync = async (temperature) => {
+        try{
+            const results = await fetch(`https://api.sampleapis.com/coffee/${temperature}`);
+            const data = await results.json();
+            setCoffeeList(data);
+        }
+        catch(err) {
+            alert(err)
+        }
+    }
+
+
+    
   return (
     <>
-      <button onClick = {() => getCoffee('hot')}>Hot</button>
-      <button onClick={() => getCoffee('iced')}>Cold</button>
+      <button onClick = {() => getCoffeeSync('hot')}>Hot</button>
+      <button onClick={() => getCoffeeSync('iced')}>Cold</button>
     <section>
         <h2>Coffee List</h2>
         {!coffeeList
